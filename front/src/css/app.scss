@@ -1,0 +1,14 @@
+@font-face {
+  font-family: customfont;
+  src: url(./fonts/Roboto-Regular.ttf);
+}
+
+// declare a class which applies it
+*{
+  font-family: customfont
+}
+@media (max-width: 450px) {
+  .ocultarMovil{
+    display: none;
+  }
+}

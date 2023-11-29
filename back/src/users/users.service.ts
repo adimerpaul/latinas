@@ -41,4 +41,15 @@ export class UsersService {
       throw new NotFoundException(`User with id ${id} not found`);
     }
   }
+  async generate() {
+    const facerUsers = [];
+    for (let i = 0; i < 10000; i++) {
+      facerUsers.push({
+        name: `Facer ${i}`,
+        email: `fakeruser${i}`,
+        password: `fakeruser${i}`,
+      });
+    };
+    return await this.userRepository.save(facerUsers);
+  }
 }

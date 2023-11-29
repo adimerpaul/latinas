@@ -11,7 +11,7 @@ import {
 @Entity()
 // @Index("IDX_USER_DELETED_AT", ["deletedAt"])
 // @Index("IDX_USER_EMAIL", ["email"], { unique: true })
-export class User {
+export class Users {
     @PrimaryGeneratedColumn()
     id: number;
     @Column()

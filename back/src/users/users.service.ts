@@ -1,15 +1,15 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import {User} from "./entities/user.entity";
+import { Users } from "./entities/users.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 
 @Injectable()
 export class UsersService {
   constructor(
-      @InjectRepository(User)
-      private readonly userRepository: Repository<User>,
+      @InjectRepository(Users)
+      private readonly userRepository: Repository<Users>,
   ) {}
   async create(createUserDto: CreateUserDto) {
     const user = this.userRepository.create(createUserDto);
@@ -43,7 +43,7 @@ export class UsersService {
   }
   async generate() {
     const facerUsers = [];
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 1000; i++) {
       facerUsers.push({
         name: `Facer ${i}`,
         email: `fakeruser${i}`,

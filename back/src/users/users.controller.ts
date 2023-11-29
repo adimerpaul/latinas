@@ -2,16 +2,21 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiOperation({summary: 'crear un usuario'})
+  @ApiResponse({status: 201, description: 'usuario creado'})
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
-
+  @ApiOperation({summary: 'obtener todos los usuarios'})
+  @ApiResponse({status: 200, description: 'usuarios'})
   @Get()
   findAll() {
     return this.usersService.findAll();

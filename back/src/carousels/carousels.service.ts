@@ -11,8 +11,11 @@ export class CarouselsService {
     @InjectRepository(Carousels)
     private readonly carouselRepository: Repository<Carousels>,
   ) {}
-  async create(createCarouselDto: CreateCarouselDto) {
-    const carousel = this.carouselRepository.create(createCarouselDto);
+  async create(createCarouselDto: CreateCarouselDto,file: Express.Multer.File) {
+    const carousel = this.carouselRepository.create({
+        ...createCarouselDto,
+        image: file.originalname,
+    });
     return await this.carouselRepository.save(carousel);
   }
 

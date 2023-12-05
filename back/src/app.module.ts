@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { CarouselsModule } from './carousels/carousels.module';
 import * as process from "process";
+import {MulterModule} from "@nestjs/platform-express";
+import {multerOptions} from "./multer.config";
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import * as process from "process";
         synchronize: process.env.DB_SYNCHRONIZE === 'true' || true,
       }),
       UsersModule,
+      MulterModule.register(multerOptions),
       CarouselsModule,
   ],
   controllers: [AppController],

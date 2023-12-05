@@ -1,17 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile} from '@nestjs/common';
 import { CarouselsService } from './carousels.service';
 import { CreateCarouselDto } from './dto/create-carousel.dto';
 import { UpdateCarouselDto } from './dto/update-carousel.dto';
 import {ApiTags} from "@nestjs/swagger";
+import {FileInterceptor} from "@nestjs/platform-express";
 
 @ApiTags('carousels')
 @Controller('carousels')
 export class CarouselsController {
   constructor(private readonly carouselsService: CarouselsService) {}
 
-  @Post()
-  create(@Body() createCarouselDto: CreateCarouselDto) {
-    return this.carouselsService.create(createCarouselDto);
+  // @Post()
+  // create(@Body() createCarouselDto: CreateCarouselDto) {
+  //   return this.carouselsService.create(createCarouselDto);
+  // }
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() createCarouselDto: CreateCarouselDto) {
+    console.log(file.buffer);
+    return this.carouselsService.create(createCarouselDto,file);
   }
 
   @Get()

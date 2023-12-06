@@ -5,7 +5,7 @@
       infinite
       animated
       v-model="slide"
-      height="350px"
+      height="450px"
     >
       <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg">
         <div class="absolute-bottom full-width full-height custom-caption">

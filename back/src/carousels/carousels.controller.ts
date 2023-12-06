@@ -4,6 +4,7 @@ import { CreateCarouselDto } from './dto/create-carousel.dto';
 import { UpdateCarouselDto } from './dto/update-carousel.dto';
 import {ApiTags} from "@nestjs/swagger";
 import {FileInterceptor} from "@nestjs/platform-express";
+import {multerOptions} from "../multer.config";
 
 @ApiTags('carousels')
 @Controller('carousels')
@@ -17,7 +18,7 @@ export class CarouselsController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File, @Body() createCarouselDto: CreateCarouselDto) {
-    console.log(file.buffer);
+    // console.log(file);
     return this.carouselsService.create(createCarouselDto,file);
   }
 

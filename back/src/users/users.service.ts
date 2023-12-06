@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Users } from "./entities/users.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
+import {faker} from "@faker-js/faker/locale/es";
 
 @Injectable()
 export class UsersService {
@@ -45,9 +46,9 @@ export class UsersService {
     const facerUsers = [];
     for (let i = 0; i < 1000; i++) {
       facerUsers.push({
-        name: `Facer ${i}`,
-        email: `fakeruser${i}`,
-        password: `fakeruser${i}`,
+        name: faker.person.firstName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
       });
     };
     return await this.userRepository.save(facerUsers);

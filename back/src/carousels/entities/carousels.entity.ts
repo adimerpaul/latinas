@@ -10,7 +10,7 @@ export class Carousels {
     description: string;
     @Column()
     image: string;
-    @Column()
+    @Column({default: 'ACTIVE'})
     status: string;
     @CreateDateColumn()
     createdAt: Date;

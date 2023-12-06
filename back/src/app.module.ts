@@ -6,9 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { CarouselsModule } from './carousels/carousels.module';
 import * as process from "process";
-import {MulterModule} from "@nestjs/platform-express";
-import {multerOptions} from "./multer.config";
-
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 @Module({
   imports: [
       ConfigModule.forRoot(),
@@ -23,8 +22,12 @@ import {multerOptions} from "./multer.config";
         synchronize: process.env.DB_SYNCHRONIZE === 'true' || true,
       }),
       UsersModule,
-      MulterModule.register(multerOptions),
+      // MulterModule.register(multerOptions),
       CarouselsModule,
+      ServeStaticModule.forRoot({
+          rootPath: join(__dirname, '..', 'uploads'), // Ruta a la carpeta de archivos estáticos
+          serveRoot: '/uploads', // Ruta base para servir los archivos estáticos
+      }),
   ],
   controllers: [AppController],
   providers: [AppService],

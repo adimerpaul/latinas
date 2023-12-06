@@ -3,10 +3,12 @@
     <q-header class="bg-grey-2">
       <q-toolbar class="text-grey GPLAY__toolbar">
         <div class="q-pr-lg flex flex-center" v-if="$q.screen.gt.xs">
-          <q-img src="logo.png" width="35px" />
+          <q-img src="logo.png" width="35px" style="border-radius: 50%;" />
           <!-- Nuevo div con el texto -->
-          <div class="q-px-md">
-            <div class="text-grey-9 text-bold text-subtitle1">Latinas</div>
+          <div class="q-px-none q-pt-xs q-ml-md" style="line-height: 0.5">
+<!--            <div class="text-grey-9 text-bold text-subtitle1" style="border:1px solid red">Latinas</div>-->
+<!--            <span class="text-caption" style="border:1px solid blue">Editores SRL</span>-->
+            <span class="text-grey-9 text-bold" style="font-size: 1.5em">latinas</span><br>
             <span class="text-caption">Editores SRL</span>
           </div>
         </div>

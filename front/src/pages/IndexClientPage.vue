@@ -5,39 +5,36 @@
       infinite
       animated
       v-model="slide"
-      height="450px"
+      :height="$q.screen.lt.md?'180px':'250px'"
     >
-      <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg">
-        <div class="absolute-bottom full-width full-height custom-caption">
-          <div class="text-h2">First stop</div>
-          <div class="text-subtitle1">Mountains</div>
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
-        <div class="absolute-bottom full-width full-height custom-caption">
-          <div class="text-h2">Second stop</div>
-          <div class="text-subtitle1">Famous City</div>
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg">
-        <div class="absolute-bottom full-width full-height custom-caption">
-          <div class="text-h2">Third stop</div>
-          <div class="text-subtitle1">Famous Bridge</div>
-        </div>
-      </q-carousel-slide>
+      <q-carousel-slide v-for="(c,i) in carousels" :key="i+1" :name="i+1"
+                        :img-src="$q.screen.lt.md?`${url}uploads/${c.imageMobile}`:`${url}uploads/${c.image}`"/>
     </q-carousel>
+    <pre>{{carousels}}</pre>
+    <pre>{{url}}</pre>
   </q-page>
 </template>
 
 <script lang="ts">
+import { useQuasar } from 'quasar'
 import { defineComponent, ref } from 'vue'
-
+import { api, url } from 'boot/axios'
 export default defineComponent({
   name: 'IndexClientPage',
   setup () {
+    const $q = useQuasar()
     return {
-      slide: ref(1)
+      slide: ref(1),
+      carousels: ref([]),
+      url
     }
+  },
+  mounted () {
+    api.get('carousels/allActive').then((res) => {
+      this.carousels = res.data
+    }).catch((err) => {
+      console.log(err)
+    })
   }
 })
 </script>

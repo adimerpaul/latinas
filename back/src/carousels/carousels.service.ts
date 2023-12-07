@@ -44,7 +44,14 @@ export class CarouselsService {
   async findAll() {
     return await this.carouselRepository.find({
       order: { id: 'ASC' },
-      select: ['id', 'name', 'description', 'image', 'status'],
+      select: ['id', 'imageMobile', 'image', 'status'],
+    });
+  }
+  async allActive() {
+    return await this.carouselRepository.find({
+      order: { id: 'ASC' },
+      select: ['id', 'imageMobile', 'image', 'status'],
+      where: { status: 'ACTIVE' }
     });
   }
 

@@ -3,14 +3,17 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Users } from "./entities/users.entity";
 import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {getManager, Repository} from "typeorm";
 import {faker} from "@faker-js/faker/locale/es";
+import {Carousels} from "../carousels/entities/carousels.entity";
 
 @Injectable()
 export class UsersService {
   constructor(
       @InjectRepository(Users)
       private readonly userRepository: Repository<Users>,
+      @InjectRepository(Carousels)
+        private readonly carouselRepository: Repository<Carousels>,
   ) {}
   async create(createUserDto: CreateUserDto) {
     const user = this.userRepository.create(createUserDto);
@@ -43,6 +46,9 @@ export class UsersService {
     }
   }
   async generate() {
+    //const entityManager = getManager();  // getEntityManager() method is deprecated
+    // await entityManager.query('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
+    this.userRepository.clear();
     const facerUsers = [];
     for (let i = 0; i < 1000; i++) {
       facerUsers.push({
@@ -51,6 +57,24 @@ export class UsersService {
         password: faker.internet.password(),
       });
     };
-    return await this.userRepository.save(facerUsers);
+    await this.userRepository.save(facerUsers);
+
+    await this.carouselRepository.clear();
+
+    // Generar nuevos carousels
+    const carousels = [];
+    carousels.push({
+      image: 'banner_1.jpg',
+      imageMobile: 'cel_8.jpg',
+    });
+    carousels.push({
+        image: 'Lourdes_ferro_-_banner.jpg',
+        imageMobile: 'Lourdes_ferro_-_cel.jpg',
+    });
+    carousels.push({
+        image: 'Lotrece_preguntas_-_banner_2.jpg',
+        imageMobile: 'trece_preguntas_-_cel_2.jpg',
+    });
+    await this.carouselRepository.save(carousels);
   }
 }

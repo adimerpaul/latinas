@@ -26,6 +26,10 @@ export class CarouselsController {
   findAll() {
     return this.carouselsService.findAll();
   }
+  @Get('allActive')
+    findAllActive() {
+        return this.carouselsService.allActive();
+    }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

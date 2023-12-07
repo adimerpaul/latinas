@@ -4,12 +4,14 @@ import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColu
 export class Carousels {
     @PrimaryGeneratedColumn()
     id: number;
-    @Column()
+    @Column({nullable: true})
     name: string;
-    @Column()
+    @Column({nullable: true})
     description: string;
     @Column()
     image: string;
+    @Column()
+    imageMobile: string;
     @Column({default: 'ACTIVE'})
     status: string;
     @CreateDateColumn()

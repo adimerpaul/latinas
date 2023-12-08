@@ -1,21 +1,19 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="bg-grey-3">
     <q-header class="bg-grey-2">
-      <q-toolbar class="text-grey GPLAY__toolbar">
+      <q-toolbar class="text-grey bg-primary">
         <div class="q-pr-lg flex flex-center" v-if="$q.screen.gt.xs">
-          <q-img src="logo.png" width="35px" style="border-radius: 50%;" />
+          <q-img src="logo.png" width="45px" class="cursor-pointer" />
           <!-- Nuevo div con el texto -->
-          <div class="q-px-none q-pt-xs q-ml-md" style="line-height: 0.5">
-<!--            <div class="text-grey-9 text-bold text-subtitle1" style="border:1px solid red">Latinas</div>-->
-<!--            <span class="text-caption" style="border:1px solid blue">Editores SRL</span>-->
-            <span class="text-grey-9 text-bold" style="font-size: 1.5em">latinas</span><br>
-            <span class="text-caption">Editores SRL</span>
+          <div class="q-px-none q-pt-xs q-ml-md" style="line-height: 0.8">
+            <span class="text-bold text-white beauRivage" style="font-size: 2.5em">Latinas</span><br>
+            <span class="text-caption text-white beauRivage" style="font-size: 1.5em">Editores SRL</span>
           </div>
         </div>
 
         <q-space />
         <div class="GPLAY__toolbar-input-container row no-wrap">
-          <q-input dense outlined v-model="search" placeholder="Buscar" class="bg-white col">
+          <q-input dense outlined v-model="search" placeholder="Buscar" bg-color="white" class="col" rounded>
             <template v-slot:append>
               <q-icon name="search" />
             </template>
@@ -30,7 +28,7 @@
 <!--            <q-tooltip>Google Apps</q-tooltip>-->
 <!--          </q-btn>-->
 
-          <q-btn round dense flat color="grey-8" icon="notifications">
+          <q-btn round dense flat color="white" icon="notifications">
             <q-badge color="red" text-color="white" floating>
               2
             </q-badge>
@@ -45,6 +43,18 @@
           </q-btn>
         </div>
       </q-toolbar>
+<!--      <q-toolbar class="shadow-2 rounded-borders">-->
+<!--        <q-space />-->
+        <q-tabs
+          dense
+          v-model="tab"
+          no-caps
+          class="bg-primary white shadow-2 text-bold"
+        >
+          <q-tab v-for="c in categories" :key="c.id" :name="c.name" :label="c.name" />
+        </q-tabs>
+<!--        <q-space />-->
+<!--      </q-toolbar>-->
     </q-header>
     <q-page-container>
       <router-view />
@@ -54,7 +64,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-
+import { api } from 'boot/axios'
 export default defineComponent({
   name: 'MainClienteLayout',
 
@@ -65,10 +75,26 @@ export default defineComponent({
     return {
       leftDrawerOpen,
       search,
+      tab: ref('tab1'),
+      categories: ref([]),
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
+      },
+      capitalizeFirstLetter (str:string) {
+        // Capitalizar solo la primera letra
+        return str.charAt(0).toUpperCase() + str.slice(1)
       }
     }
+  },
+  created () {
+    api.get('categories').then((res) => {
+      this.categories = res.data.map((c) => {
+        return {
+          ...c,
+          name: this.capitalizeFirstLetter(c.name.toLowerCase())
+        }
+      })
+    })
   }
 })
 </script>

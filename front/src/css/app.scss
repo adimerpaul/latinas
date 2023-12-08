@@ -1,11 +1,19 @@
 @font-face {
-  font-family: customfont;
+  font-family: roboto;
   src: url(./fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: beauRivage;
+  src: url(./fonts/BeauRivage-Regular.ttf);
 }
 
 // declare a class which applies it
 *{
-  font-family: customfont
+  font-family: roboto
+}
+.beauRivage{
+  font-family: beauRivage
 }
 @media (max-width: 450px) {
   .ocultarMovil{

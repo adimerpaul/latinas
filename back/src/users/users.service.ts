@@ -6,6 +6,7 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {getManager, Repository} from "typeorm";
 import {faker} from "@faker-js/faker/locale/es";
 import {Carousels} from "../carousels/entities/carousels.entity";
+import {Categories} from "../categories/entities/categories.entity";
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,8 @@ export class UsersService {
       private readonly userRepository: Repository<Users>,
       @InjectRepository(Carousels)
         private readonly carouselRepository: Repository<Carousels>,
+      @InjectRepository(Categories)
+        private readonly categoryRepository: Repository<Categories>,
   ) {}
   async create(createUserDto: CreateUserDto) {
     const user = this.userRepository.create(createUserDto);
@@ -76,5 +79,18 @@ export class UsersService {
         imageMobile: 'trece_preguntas_-_cel_2.jpg',
     });
     await this.carouselRepository.save(carousels);
+    this.categoryRepository.clear();
+    await this.categoryRepository.save([
+      {name:'ADMINISTRACIÓN, CONTABILIDAD Y ECONOMÍA'},
+      {name:'ARQUITECTURA'},
+      {name:'CARNAVAL DE ORURO'},
+      {name:'CIENCIAS BÁSICAS'},
+      {name:'CIENCIAS SOCIALES'},
+      {name:'DERECHO'},
+      {name:'ESCOLAR - PRE UNIVERSITARIO'},
+      {name:'ESTADÍSTICA'},
+      {name:'IDIOMAS'},
+      {name:'INGENIERÍA'},
+    ]);
   }
 }

@@ -8,6 +8,8 @@ import { CarouselsModule } from './carousels/carousels.module';
 import * as process from "process";
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { CategoriesModule } from './categories/categories.module';
+import { BooksModule } from './books/books.module';
 @Module({
   imports: [
       ConfigModule.forRoot(),
@@ -28,6 +30,8 @@ import { join } from 'path';
           rootPath: join(__dirname, '..', 'uploads'), // Ruta a la carpeta de archivos estáticos
           serveRoot: '/uploads', // Ruta base para servir los archivos estáticos
       }),
+      CategoriesModule,
+      BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

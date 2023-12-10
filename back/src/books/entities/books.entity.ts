@@ -1,4 +1,12 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    DeleteDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import {Categories} from "../../categories/entities/categories.entity";
 
 @Entity('books')
@@ -15,4 +23,12 @@ export class Books {
     indice: string;
     @ManyToOne(() => Categories, (category ) => category.books)
     category: Categories;
+    @Column()
+    price: number;
+    @CreateDateColumn()
+    createdAt: Date;
+    @UpdateDateColumn()
+    updatedAt: Date;
+    @DeleteDateColumn()
+    deletedAt: Date;
 }

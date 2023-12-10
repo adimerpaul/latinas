@@ -12,9 +12,14 @@ export class BooksController {
     return this.booksService.create(createBookDto);
   }
 
+  // @Get()
+  // findAll() {
+  //   return this.booksService.findAll();
+  // }
+
   @Get()
-  findAll() {
-    return this.booksService.findAll();
+  findAllGroupedByCategory() {
+    return this.booksService.findAllGroupedByCategory();
   }
 
   @Get(':id')

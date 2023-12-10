@@ -58,6 +58,10 @@
     </q-header>
     <q-page-container>
       <router-view />
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
+        <q-btn fab icon="fa-brands fa-whatsapp" dense class="q-pa-xs" color="green-9" type="a"
+               :href="'https://api.whatsapp.com/send?phone=591' + 75400845 + '&text=Hola%20quiero%20comprar%20un%20libro'"></q-btn>
+      </q-page-sticky>
     </q-page-container>
   </q-layout>
 </template>

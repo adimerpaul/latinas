@@ -3,7 +3,7 @@
     <q-header class="bg-grey-2">
       <q-toolbar class="text-grey bg-primary">
         <div class="q-pr-lg flex flex-center" v-if="$q.screen.gt.xs">
-          <q-img src="logo.png" width="45px" class="cursor-pointer" />
+          <q-img src="/logo.png" width="45px" class="cursor-pointer" />
           <!-- Nuevo div con el texto -->
           <div class="q-px-none q-pt-xs q-ml-md" style="line-height: 0.8">
             <span class="text-bold text-white beauRivage" style="font-size: 2.5em">Latinas</span><br>

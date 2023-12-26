@@ -44,15 +44,14 @@
                               dense
                               no-caps
                               icon="visibility"
-                              @click="$router.push({name:'book',params:{id:item.id}})"></q-btn>
+                              @click="this.$router.push(`/book/${item.id}`)"></q-btn>
                       <q-btn
                               class="full-width q-ma-xs"
                               color="green"
                               label="Comprar"
                               dense
                               no-caps
-                              icon="shopping_cart"
-                              @click="$router.push({name:'book',params:{id:item.id}})"></q-btn>
+                              icon="shopping_cart"></q-btn>
                     </q-card-section>
                 </q-card>
             </q-virtual-scroll>

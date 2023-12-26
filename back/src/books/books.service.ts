@@ -32,8 +32,8 @@ export class BooksService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} book`;
+  async findOne(id: number) {
+    return await this.booksRepository.findOne({ where: { id } });
   }
 
   update(id: number, updateBookDto: UpdateBookDto) {

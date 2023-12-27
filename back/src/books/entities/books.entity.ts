@@ -17,14 +17,18 @@ export class Books {
     name: string;
     @Column({nullable: true})
     description: string;
-    @Column()
+    @Column({nullable: true,default: 'notFound.jpg'})
     image: string;
-    @Column()
+    @Column({nullable: true})
     indice: string;
-    @ManyToOne(() => Categories, (category ) => category.books)
-    category: Categories;
     @Column()
     price: number;
+    @Column()
+    stock: number;
+    @Column()
+    author: string;
+    @ManyToOne(() => Categories, (category ) => category.books,{ nullable: true })
+    category: Categories;
     @CreateDateColumn()
     createdAt: Date;
     @UpdateDateColumn()

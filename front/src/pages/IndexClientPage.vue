@@ -28,7 +28,7 @@
 <!--              <pre>{{item}}</pre>-->
                 <q-card class="my-card">
 <!--                  :ratio="1"-->
-                    <q-img :src="`${url}uploads/${item.image}`" style="width: 180px;height: 250px">
+                    <q-img :src="`${url}uploads/${item.image}`" style="width: 180px;height: 180px">
 <!--                        <div class="absolute-bottom text-center text-bold" style="padding: 5px;line-height: 1">-->
 <!--                            {{item.name}}-->
 <!--                        </div>-->

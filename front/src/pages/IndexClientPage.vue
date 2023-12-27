@@ -26,7 +26,7 @@
                     v-slot="{ item }"
             >
 <!--              <pre>{{item}}</pre>-->
-                <q-card class="my-card">
+                <q-card class="my-card cursor-pointer" @click="this.$router.push(`/book/${item.id}`)">
 <!--                  :ratio="1"-->
                     <q-img :src="`${url}uploads/${item.image}`" style="width: 180px;height: 180px">
 <!--                        <div class="absolute-bottom text-center text-bold" style="padding: 5px;line-height: 1">-->

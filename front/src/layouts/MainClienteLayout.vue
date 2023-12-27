@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf" class="bg-grey-3">
     <q-header class="bg-grey-2">
       <q-toolbar class="text-grey bg-primary">
-        <div class="q-pr-lg flex flex-center" v-if="$q.screen.gt.xs">
+        <div class="q-pr-lg flex flex-center cursor-pointer" v-if="$q.screen.gt.xs" @click="this.$router.push(`/`)">
           <q-img src="/logo.png" width="45px" class="cursor-pointer" />
           <!-- Nuevo div con el texto -->
           <div class="q-px-none q-pt-xs q-ml-md" style="line-height: 0.8">

@@ -21,11 +21,11 @@ export class Books {
     image: string;
     @Column({nullable: true})
     indice: string;
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
     price: number;
-    @Column()
+    @Column({default: 0})
     stock: number;
-    @Column()
+    @Column({nullable: true})
     author: string;
     @ManyToOne(() => Categories, (category ) => category.books,{ nullable: true })
     category: Categories;

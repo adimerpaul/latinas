@@ -12,10 +12,10 @@ export class BooksController {
     return this.booksService.create(createBookDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.booksService.findAll();
-  // }
+  @Get('all') // Ruta: 'http://localhost:3000/books/all
+  findAll() {
+    return this.booksService.findAll();
+  }
 
   @Get()
   findAllGroupedByCategory() {

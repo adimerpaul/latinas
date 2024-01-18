@@ -23,6 +23,8 @@ export class Books {
     indice: string;
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
     price: number;
+    @Column({type: 'decimal', precision: 10, scale: 2, nullable: true})
+    priceOffer: number;
     @Column({default: 0})
     stock: number;
     @Column({nullable: true})

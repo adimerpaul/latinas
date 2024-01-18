@@ -13,11 +13,59 @@
 
         <q-space />
         <div class="GPLAY__toolbar-input-container row no-wrap">
-          <q-input dense outlined v-model="search" placeholder="Buscar" bg-color="white" class="col" rounded>
-            <template v-slot:append>
-              <q-icon name="search" />
+<!--          <q-select dense outlined v-model="search" bg-color="white" class="col" rounded-->
+<!--                    :options="booksAll" option-value="id" option-label="name" use-input input-debounce="0"-->
+<!--          >-->
+<!--            <template v-slot:append>-->
+<!--              <q-icon name="search" />-->
+<!--            </template>-->
+<!--          </q-select>-->
+          <q-select
+            dense
+            clearable
+            outlined
+            bg-color="white"
+            class="col q-pt-md"
+            rounded
+            v-model="search"
+            use-input
+            hide-selected
+            fill-input
+            input-debounce="0"
+            :options="booksAll"
+            @filter="filterFn"
+            placeholder="Buscar"
+            style="width: 250px; padding-bottom: 32px"
+            option-value="id" option-label="name"
+            @update:model-value="changeRoute"
+          >
+<!--            <template v-slot:append>-->
+<!--              <q-icon name="search" />-->
+<!--            </template>-->
+            <template v-slot:no-option>
+              <q-item>
+                <q-item-section class="text-grey">
+                  No results
+                </q-item-section>
+              </q-item>
             </template>
-          </q-input>
+            <template v-slot:option="scope">
+              <q-item v-bind="scope.itemProps">
+                <q-item-section avatar>
+                  <q-img :src="`${url}uploads/${scope.opt.image}`" style="width: 30px;height: 50px">
+                    <!--                        <div class="absolute-bottom text-center text-bold" style="padding: 5px;line-height: 1">-->
+                    <!--                            {{item.name}}-->
+                    <!--                        </div>-->
+                  </q-img>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ scope.opt.name }}</q-item-label>
+                  <q-item-label caption>{{ scope.opt.author }}</q-item-label>
+                  <q-item-label caption class="text-bold text-red">{{ scope.opt.price }} Bs</q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
 <!--          <q-btn class="GPLAY__toolbar-input-btn" color="primary" icon="search" unelevated />-->
         </div>
 
@@ -68,25 +116,44 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { api } from 'boot/axios'
+import { api, url } from 'boot/axios'
+const stringOptions = [
+  'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+]
 export default defineComponent({
   name: 'MainClienteLayout',
 
   setup () {
     const leftDrawerOpen = ref(false)
     const search = ref('')
-
+    const options = ref(stringOptions)
+    const booksAll = ref([])
+    const booksAll2 = ref([])
     return {
+      options,
       leftDrawerOpen,
       search,
       tab: ref('tab1'),
       categories: ref([]),
+      booksAll,
+      booksAll2,
+      url,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },
       capitalizeFirstLetter (str:string) {
         // Capitalizar solo la primera letra
         return str.charAt(0).toUpperCase() + str.slice(1)
+      },
+      changeRoute (val) {
+        this.$router.push(`/book/${val}`)
+      },
+      filterFn (val, update, abort) {
+        update(() => {
+          const needle = val.toLowerCase()
+          // console.log(needle)
+          booksAll.value = booksAll2.value.filter((v) => v.name.toLowerCase().includes(needle))
+        })
       }
     }
   },
@@ -98,6 +165,15 @@ export default defineComponent({
           name: this.capitalizeFirstLetter(c.name.toLowerCase())
         }
       })
+    })
+    api.get('books/all').then((res) => {
+      this.booksAll = res.data.map((b) => {
+        return {
+          ...b,
+          name: this.capitalizeFirstLetter(b.name.toLowerCase())
+        }
+      })
+      this.booksAll2 = this.booksAll
     })
   }
 })

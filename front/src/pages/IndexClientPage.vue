@@ -19,39 +19,67 @@
     </q-carousel>
     <div class="row">
         <div class="col-12" v-for="b in books" :key="b.id">
-            <div class="q-px-md text-bold text-grey-7 text-subtitle1">{{b.name}}</div>
+            <div class="q-px-md text-bold text-grey-9 text-subtitle1 text-center">{{b.name}}</div>
             <q-virtual-scroll
                     :items="b.books"
                     virtual-scroll-horizontal
                     v-slot="{ item }"
             >
-<!--              <pre>{{item}}</pre>-->
                 <q-card class="my-card cursor-pointer" @click="this.$router.push(`/book/${item.id}`)">
-<!--                  :ratio="1"-->
-                    <q-img :src="`${url}uploads/${item.image}`" style="width: 180px;height: 180px">
+                    <q-img :src="`${url}uploads/${item.image}`" style="width: 200px;height: 200px">
 <!--                        <div class="absolute-bottom text-center text-bold" style="padding: 5px;line-height: 1">-->
 <!--                            {{item.name}}-->
 <!--                        </div>-->
                     </q-img>
 
-                    <q-card-section style="padding: 5px">
-                        <div class="text-center text-bold">{{capitalizeFirstLetter(item.name.toLowerCase())}}</div>
-                        <div class="text-bold q-pl-lg text-subtitle1 text-red">{{item.price}} Bs</div>
-                      <q-btn
-                              class="full-width q-ma-xs"
-                              color="primary"
-                              label="Ver"
-                              dense
-                              no-caps
-                              icon="visibility"
-                              @click="this.$router.push(`/book/${item.id}`)"></q-btn>
-                      <q-btn
-                              class="full-width q-ma-xs"
-                              color="green"
-                              label="Comprar"
-                              dense
-                              no-caps
-                              icon="shopping_cart"></q-btn>
+                    <q-card-section class="q-pa-none bg-grey-1">
+                      <div class="text-bold q-pl-lg text-bold text-red">
+                        {{item.price}} Bs
+                        <span class="text-grey subrayar" v-if="item.priceOffer">
+                          {{item.priceOffer}} Bs
+                        </span>
+                      </div>
+                        <div class="text-center text-bold text-grey-9" style="height: 40px;line-height: 1.2">
+                          {{capitalizeFirstLetter(item.name.toLowerCase())}}
+                        </div>
+<!--                      <div class="row">-->
+                        <div class="q-pa-xs">
+                          <q-btn
+                                  class="full-width q-pa-xs"
+                                  color="primary"
+                                  label="Ver"
+                                  dense
+                                  no-caps
+                                  size="sm"
+                                  icon="visibility"
+                                  @click="this.$router.push(`/book/${item.id}`)"></q-btn>
+                        </div>
+<!--                        <div class="col-6 q-pa-xs">-->
+<!--                          <q-btn-->
+<!--                                  class="full-width q-ma-xs"-->
+<!--                                  color="green"-->
+<!--                                  label="Comprar"-->
+<!--                                  dense-->
+<!--                                  no-caps-->
+<!--                                  size="sm"-->
+<!--                                  icon="shopping_cart"></q-btn>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <q-btn-->
+<!--                              class="full-width q-ma-xs"-->
+<!--                              color="primary"-->
+<!--                              label="Ver"-->
+<!--                              dense-->
+<!--                              no-caps-->
+<!--                              icon="visibility"-->
+<!--                              @click="this.$router.push(`/book/${item.id}`)"></q-btn>-->
+<!--                      <q-btn-->
+<!--                              class="full-width q-ma-xs"-->
+<!--                              color="green"-->
+<!--                              label="Comprar"-->
+<!--                              dense-->
+<!--                              no-caps-->
+<!--                              icon="shopping_cart"></q-btn>-->
                     </q-card-section>
                 </q-card>
             </q-virtual-scroll>
@@ -104,7 +132,9 @@ export default defineComponent({
 <style lang="sass" scoped>
 .my-card
   width: 100%
-  margin: 10px
-  padding: 10px
+  margin: 5px
+  padding: 0px
   max-width: 200px
+.subrayar
+  text-decoration: line-through
 </style>

@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers'
 import axios, { AxiosInstance } from 'axios'
+import { useCounterStore } from 'stores/example-store'
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -21,6 +22,7 @@ export default boot(({ app }) => {
   app.config.globalProperties.$axios = axios.create({ baseURL: import.meta.env.VITE_API_BACK })
   app.config.globalProperties.$url = import.meta.env.VITE_API_BACK
   app.config.globalProperties.$axios = axios
+  app.config.globalProperties.$store = useCounterStore()
   // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
   //       so you won't necessarily have to import axios in each vue file
 

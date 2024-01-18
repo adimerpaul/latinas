@@ -4,7 +4,7 @@
       <q-toolbar class="text-grey bg-primary">
         <div class="q-pr-lg flex flex-center cursor-pointer" v-if="$q.screen.gt.xs" @click="this.$router.push(`/`)">
           <q-img src="/logo.png" width="45px" class="cursor-pointer" />
-          <!-- Nuevo div con el texto -->
+<!--           Nuevo div con el texto-->
           <div class="q-px-none q-pt-xs q-ml-md" style="line-height: 0.8">
             <span class="text-bold text-white beauRivage" style="font-size: 2.5em">Latinas</span><br>
             <span class="text-caption text-white beauRivage" style="font-size: 1.5em">Editores SRL</span>
@@ -12,36 +12,27 @@
         </div>
 
         <q-space />
-        <div class="GPLAY__toolbar-input-container row no-wrap">
-<!--          <q-select dense outlined v-model="search" bg-color="white" class="col" rounded-->
-<!--                    :options="booksAll" option-value="id" option-label="name" use-input input-debounce="0"-->
-<!--          >-->
-<!--            <template v-slot:append>-->
-<!--              <q-icon name="search" />-->
-<!--            </template>-->
-<!--          </q-select>-->
+        <div class="GPLAY__toolbar-input-container row no-wrap q-pa-none">
           <q-select
             dense
             clearable
             outlined
             bg-color="white"
-            class="col q-pt-md"
+            class="col q-pa-none"
             rounded
             v-model="search"
             use-input
+            hide-hint
             hide-selected
             fill-input
             input-debounce="0"
             :options="booksAll"
             @filter="filterFn"
             placeholder="Buscar"
-            style="width: 250px; padding-bottom: 32px"
+            style="width: 250px;"
             option-value="id" option-label="name"
             @update:model-value="changeRoute"
           >
-<!--            <template v-slot:append>-->
-<!--              <q-icon name="search" />-->
-<!--            </template>-->
             <template v-slot:no-option>
               <q-item>
                 <q-item-section class="text-grey">
@@ -53,9 +44,6 @@
               <q-item v-bind="scope.itemProps">
                 <q-item-section avatar>
                   <q-img :src="`${url}uploads/${scope.opt.image}`" style="width: 30px;height: 50px">
-                    <!--                        <div class="absolute-bottom text-center text-bold" style="padding: 5px;line-height: 1">-->
-                    <!--                            {{item.name}}-->
-                    <!--                        </div>-->
                   </q-img>
                 </q-item-section>
                 <q-item-section>
@@ -66,7 +54,6 @@
               </q-item>
             </template>
           </q-select>
-<!--          <q-btn class="GPLAY__toolbar-input-btn" color="primary" icon="search" unelevated />-->
         </div>
 
         <q-space />

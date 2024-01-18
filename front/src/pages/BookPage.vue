@@ -56,6 +56,17 @@ export default defineComponent({
           cancel: true,
           persistent: true
         }).onOk((value) => {
+          $q.notify({
+            message: 'Agregado al carrito ' + value + ' ' + book.name,
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'shopping_cart',
+            position: 'top',
+            timeout: 1000,
+            actions: [
+              { icon: 'close', color: 'white', round: true, handler: () => { /* ... */ } }
+            ]
+          })
           this.$store.pedidos.push({
             ...book,
             quantity: value

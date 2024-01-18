@@ -86,7 +86,7 @@
           no-caps
           class="bg-primary white shadow-2 text-bold"
         >
-          <q-tab v-for="c in categories" :key="c.id" :name="c.name" :label="c.name" />
+          <q-tab v-for="c in categories" :key="c.id" :name="c.name" :label="c.name" @click="this.$router.push(`/`)" />
         </q-tabs>
 <!--        <q-space />-->
 <!--      </q-toolbar>-->

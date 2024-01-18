@@ -1,6 +1,7 @@
 import { boot } from 'quasar/wrappers'
 import axios, { AxiosInstance } from 'axios'
 import { useCounterStore } from 'stores/example-store'
+import VueSocialSharing from 'vue-social-sharing'
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -18,6 +19,7 @@ declare module '@vue/runtime-core' {
 const api = axios.create({ baseURL: import.meta.env.VITE_API_BACK })
 const url = import.meta.env.VITE_API_BACK
 export default boot(({ app }) => {
+  app.use(VueSocialSharing)
   // for use inside Vue files (Options API) through this.$axios and this.$api
   app.config.globalProperties.$axios = axios.create({ baseURL: import.meta.env.VITE_API_BACK })
   app.config.globalProperties.$url = import.meta.env.VITE_API_BACK

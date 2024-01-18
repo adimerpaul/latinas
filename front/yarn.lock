@@ -988,11 +988,6 @@
   "resolved" "https://registry.npmjs.org/@eslint/js/-/js-8.54.0.tgz"
   "version" "8.54.0"
 
-"@faker-js/faker@^8.3.1":
-  "integrity" "sha512-FdgpFxY6V6rLZE9mmIBb9hM0xpfvQOSNOLnzolzKwsE1DH+gC7lEKV1p1IbR0lAYyvYd5a4u3qWJzowUkw1bIw=="
-  "resolved" "https://registry.npmjs.org/@faker-js/faker/-/faker-8.3.1.tgz"
-  "version" "8.3.1"
-
 "@humanwhocodes/config-array@^0.11.13":
   "integrity" "sha512-JSBDMiDKSzQVngfRjOdFXgFfklaXI4K9nLF49Auh21lmBWRLIK3+xTErTWD4KU54pb6coM6ESE7Awz/FNU3zgQ=="
   "resolved" "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.13.tgz"
@@ -4976,6 +4971,11 @@
   "version" "4.2.5"
   dependencies:
     "@vue/devtools-api" "^6.5.0"
+
+"vue-social-sharing@^4.0.0-alpha4":
+  "integrity" "sha512-hMbgpZkY5aRAiznSB/sgzdMVgdSbkmIHEaELX7pUbuUd6KS1Z/GAi7a/q0Qn+GFn0+6qMMvwyp3ZOE0+WYPQ1w=="
+  "resolved" "https://registry.npmjs.org/vue-social-sharing/-/vue-social-sharing-4.0.0-alpha4.tgz"
+  "version" "4.0.0-alpha4"
 
 "vue@^2.6.14 || ^3.3.0", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.25", "vue@^3.2.29", "vue@3.3.8":
   "integrity" "sha512-5VSX/3DabBikOXMsxzlW8JyfeLKlG9mzqnWgLQLty88vdZL7ZJgrdgBOmrArwxiLtmS+lNNpPcBYqrhE6TQW5w=="

@@ -104,6 +104,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { api, url } from 'boot/axios'
+import { useRouter } from 'vue-router'
 const stringOptions = [
   'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
 ]
@@ -116,6 +117,7 @@ export default defineComponent({
     const options = ref(stringOptions)
     const booksAll = ref([])
     const booksAll2 = ref([])
+    const $router = useRouter()
     return {
       options,
       leftDrawerOpen,
@@ -133,7 +135,8 @@ export default defineComponent({
         return str.charAt(0).toUpperCase() + str.slice(1)
       },
       changeRoute (val) {
-        this.$router.push(`/book/${val}`)
+        console.log(val)
+        $router.push(`/book/${val.id}`)
       },
       filterFn (val, update, abort) {
         update(() => {

@@ -42,7 +42,7 @@ export default defineComponent({
         return str.charAt(0).toUpperCase() + str.slice(1)
       },
       addToCart (book) {
-        console.log('book', book)
+        // console.log('book', book)
         $q.dialog({
           title: 'Agregar al carrito',
           message: '¿Cuantos desea agregar?',
@@ -74,14 +74,22 @@ export default defineComponent({
     }
   },
   mounted () {
-    console.log('url', url)
-    const bookId = this.$route.params.id
-    api.get('books/' + bookId).then((res) => {
-      this.book = res.data
-      // this.book.name = this.capitalizeFirstLetter(this.book.name.toLowerCase())
-    }).catch((err) => {
-      console.log(err)
+    this.$watch(() => this.$route.params.id, () => {
+      this.getBook()
     })
+    this.getBook()
+    // console.log('url', url)
+  },
+  methods: {
+    getBook () {
+      const bookId = this.$route.params.id
+      api.get('books/' + bookId).then((res) => {
+        this.book = res.data
+        // this.book.name = this.capitalizeFirstLetter(this.book.name.toLowerCase())
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
   }
 })
 </script>

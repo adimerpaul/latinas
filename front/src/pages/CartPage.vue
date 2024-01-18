@@ -73,7 +73,7 @@ export default defineComponent({
         return str.charAt(0).toUpperCase() + str.slice(1)
       },
       addToCart (book) {
-        console.log('book', book)
+        // console.log('book', book)
         $q.dialog({
           title: 'Agregar al carrito',
           message: '¿Cuantos desea agregar?',
@@ -105,7 +105,7 @@ export default defineComponent({
     }
   },
   mounted () {
-    console.log(this.$store.pedidos)
+    // console.log(this.$store.pedidos)
     // const bookId = this.$route.params.id
     // api.get('books/' + bookId).then((res) => {
     //   this.book = res.data

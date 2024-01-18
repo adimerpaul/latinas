@@ -20,6 +20,9 @@
           <div class="q-pa-md">
             <q-btn icon="o_shopping_cart" color="green" no-caps label="Agregar al carrito" rounded @click="addToCart(book)" />
           </div>
+<!--          <div>-->
+<!--            <pre>{{$store.pedidos}}</pre>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -52,10 +55,10 @@ export default defineComponent({
           },
           cancel: true,
           persistent: true
-        }).onOk(() => {
+        }).onOk((value) => {
           this.$store.pedidos.push({
-            book,
-            quantity: 1
+            ...book,
+            quantity: value
           })
         })
         // this.$store.dispatch('cart/addToCart', book)

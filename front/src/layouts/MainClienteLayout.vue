@@ -63,9 +63,9 @@
 <!--            <q-tooltip>Google Apps</q-tooltip>-->
 <!--          </q-btn>-->
 
-          <q-btn round dense flat color="white" icon="notifications">
+          <q-btn round dense flat color="white" icon="shopping_cart" @click="this.$router.push(`/cart`)">
             <q-badge color="red" text-color="white" floating>
-              2
+              {{ booksQuantity }}
             </q-badge>
             <q-tooltip>Notificaciones</q-tooltip>
           </q-btn>
@@ -162,6 +162,15 @@ export default defineComponent({
       })
       this.booksAll2 = this.booksAll
     })
+  },
+  computed: {
+    booksQuantity () {
+      let total = 0
+      this.$store.pedidos.forEach((p) => {
+        total += parseInt(p.quantity)
+      })
+      return total
+    }
   }
 })
 </script>

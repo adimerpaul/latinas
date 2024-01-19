@@ -1,12 +1,11 @@
 // create-carousel.dto.ts
-import { IsString } from 'class-validator';
+//import { IsString } from 'class-validator';
 
 export class CreateCarouselDto {
-    @IsString()
+//@IsString()
     name: string;
 
-    @IsString()
+//    @IsString()
     description: string;
-
     // Otros campos del DTO
 }

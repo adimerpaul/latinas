@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Users } from "./entities/users.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 import {EntityManager, getManager, Repository} from "typeorm";
-import {faker} from "@faker-js/faker/locale/es";
+//import {faker} from "@faker-js/faker/locale/es";
 import {Carousels} from "../carousels/entities/carousels.entity";
 import {Categories} from "../categories/entities/categories.entity";
 import {Books} from "../books/entities/books.entity";

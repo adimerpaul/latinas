@@ -79,7 +79,7 @@ export class UsersService {
         return user;
     }
   async generate() {
-    await this.entityManager.query('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
+    // await this.entityManager.query('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
     // this.userRepository.clear();
     // const facerUsers = [];
     // // for (let i = 0; i < 10; i++) {
@@ -96,7 +96,7 @@ export class UsersService {
     } ]);
 
     // Generar nuevos carousels
-    await this.entityManager.query('TRUNCATE TABLE carousels RESTART IDENTITY CASCADE');
+    // await this.entityManager.query('TRUNCATE TABLE carousels RESTART IDENTITY CASCADE');
     // await this.carouselRepository.clear();
     const carousels = [];
     carousels.push({
@@ -114,7 +114,7 @@ export class UsersService {
     await this.carouselRepository.save(carousels);
 
     // this.categoryRepository.clear();
-    await this.entityManager.query('TRUNCATE TABLE categories RESTART IDENTITY CASCADE');
+    // await this.entityManager.query('TRUNCATE TABLE categories RESTART IDENTITY CASCADE');
 
     await this.categoryRepository.save([
       {name:'ADMINISTRACIÓN, CONTABILIDAD Y ECONOMÍA'},
@@ -129,7 +129,7 @@ export class UsersService {
       {name:'INGENIERÍA'},
     ]);
     // this.bookRepository.clear();
-    await this.entityManager.query('TRUNCATE TABLE books RESTART IDENTITY CASCADE');
+    // await this.entityManager.query('TRUNCATE TABLE books RESTART IDENTITY CASCADE');
 
     let jsonData = fs.readFileSync('src/books/data/books.json', 'utf8');
     let booksData = JSON.parse(jsonData);

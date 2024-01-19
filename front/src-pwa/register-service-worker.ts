@@ -1,4 +1,4 @@
-import { register } from 'register-service-worker';
+import { register } from 'register-service-worker'
 
 // The ready(), registered(), cached(), updatefound() and updated()
 // events passes a ServiceWorkerRegistration instance in their arguments.
@@ -28,7 +28,7 @@ register(process.env.SERVICE_WORKER_FILE, {
   },
 
   updated (/* registration */) {
-    // console.log('New content is available; please refresh.')
+    // console.log('New content is available please refresh.')
   },
 
   offline () {
@@ -37,5 +37,5 @@ register(process.env.SERVICE_WORKER_FILE, {
 
   error (/* err */) {
     // console.error('Error during service worker registration:', err)
-  },
-});
+  }
+})

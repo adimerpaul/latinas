@@ -1,13 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {AuthGuard} from "./../auth.guard";
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+      private readonly usersService: UsersService,
+  ) {}
 
   @ApiOperation({summary: 'crear un usuario'})
   @ApiResponse({status: 201, description: 'usuario creado'})
@@ -22,10 +25,10 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.usersService.findOne(+id);
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
@@ -39,5 +42,14 @@ export class UsersController {
   @Post('generate')
   generate() {
       return this.usersService.generate();
+  }
+  @Post('login')
+  login(@Body() createUserDto: CreateUserDto) {
+      return this.usersService.login(createUserDto);
+  }
+  @UseGuards(AuthGuard)
+  @Get('me')
+  getProfile(@Request() req) {
+    return this.usersService.getProfile(req.user.id);
   }
 }

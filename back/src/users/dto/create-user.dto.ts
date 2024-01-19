@@ -3,4 +3,6 @@ export class CreateUserDto {
     description: string;
     image: string;
     status: string;
+    email: string;
+    password: string;
 }

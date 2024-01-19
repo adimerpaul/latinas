@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {BadRequestException, Injectable, NotFoundException} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Users } from "./entities/users.entity";
@@ -9,6 +9,9 @@ import {Carousels} from "../carousels/entities/carousels.entity";
 import {Categories} from "../categories/entities/categories.entity";
 import {Books} from "../books/entities/books.entity";
 import * as fs from 'fs';
+import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import {response} from "express";
 @Injectable()
 export class UsersService {
   constructor(
@@ -20,7 +23,8 @@ export class UsersService {
         private readonly categoryRepository: Repository<Categories>,
       @InjectRepository(Books)
         private readonly bookRepository: Repository<Books>,
-      private readonly entityManager: EntityManager
+      private readonly entityManager: EntityManager,
+      private jwtService: JwtService
   ) {}
   async create(createUserDto: CreateUserDto) {
     const user = this.userRepository.create(createUserDto);
@@ -30,6 +34,21 @@ export class UsersService {
     return await this.userRepository.find({
       order: { id: 'ASC' }
     });
+  }
+  async login(createUserDto: CreateUserDto) {
+    const user = await this.userRepository.findOne({where: { email: createUserDto.email },});
+    if (!user) {
+      throw new BadRequestException(`User with email ${createUserDto.email} not found`);
+    }
+    if (!await bcrypt.compare(createUserDto.password, user.password)) {
+        throw new BadRequestException(`Invalid password`);
+    }
+    const jwt = await this.jwtService.signAsync({ id: user.id });
+    return {
+        message: 'success',
+        jwt,
+        user,
+    }
   }
 
   async findOne(id: number) {
@@ -52,18 +71,29 @@ export class UsersService {
       throw new NotFoundException(`User with id ${id} not found`);
     }
   }
+    async getProfile(id: number) {
+        const user = await this.userRepository.findOne({ where: { id } });
+        if (!user) {
+        throw new BadRequestException(`User with id ${id} not found`);
+        }
+        return user;
+    }
   async generate() {
     await this.entityManager.query('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
     // this.userRepository.clear();
-    const facerUsers = [];
-    for (let i = 0; i < 10; i++) {
-      facerUsers.push({
-        name: faker.person.firstName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-      });
-    };
-    await this.userRepository.save(facerUsers);
+    // const facerUsers = [];
+    // // for (let i = 0; i < 10; i++) {
+    //   facerUsers.push({
+    //     name: faker.person.firstName(),
+    //     email: faker.internet.email(),
+    //     password: faker.internet.password(),
+    //   });
+    // // };
+    await this.userRepository.save([ {
+      name: 'admin',
+      email: 'admin@test.com',
+      password: await bcrypt.hash('123456', 10),
+    } ]);
 
     // Generar nuevos carousels
     await this.entityManager.query('TRUNCATE TABLE carousels RESTART IDENTITY CASCADE');

@@ -7,6 +7,7 @@ import {
 } from 'vue-router'
 
 import routes from './routes'
+import { useCounterStore } from 'stores/example-store'
 
 /*
  * If not building with SSR mode, you can
@@ -31,6 +32,18 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
-
+  Router.beforeEach((to, from, next) => {
+    // console.log(store().getters['showcase/isLoggedIn'])
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      // if (store().getters['login/isLoggedIn']) {
+      if (useCounterStore().isLogged) {
+        next()
+        return
+      }
+      next('/login')
+    } else {
+      next()
+    }
+  })
   return Router
 })

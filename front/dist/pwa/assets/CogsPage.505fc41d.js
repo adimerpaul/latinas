@@ -1,0 +1,1 @@
+import{Q as a}from"./QPage.5bc2f8ee.js";import{ah as e,ai as o,al as s,am as t,an as n,ar as r}from"./index.19d89bdc.js";const c=o({name:"CogsPage"}),_=r("div",null,"Cogs",-1);function i(p,d,f,l,m,u){return s(),t(a,null,{default:n(()=>[_]),_:1})}var h=e(c,[["render",i]]);export{h as default};

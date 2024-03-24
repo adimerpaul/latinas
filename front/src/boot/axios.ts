@@ -2,10 +2,11 @@ import { boot } from 'quasar/wrappers'
 import axios, { AxiosInstance } from 'axios'
 import { useCounterStore } from 'stores/example-store'
 import VueSocialSharing from 'vue-social-sharing'
+import { Alert } from 'src/addons/Alert'
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $axios: AxiosInstance;
+    // $axios: AxiosInstance;
     $api: AxiosInstance;
   }
 }
@@ -23,7 +24,8 @@ export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
   app.config.globalProperties.$axios = axios.create({ baseURL: import.meta.env.VITE_API_BACK })
   app.config.globalProperties.$url = import.meta.env.VITE_API_BACK
-  app.config.globalProperties.$axios = axios
+  // app.config.globalProperties.$axios = axios
+  app.config.globalProperties.$alert = Alert
   app.config.globalProperties.$store = useCounterStore()
   const token = localStorage.getItem('tokenLatinas')
   if (token) {

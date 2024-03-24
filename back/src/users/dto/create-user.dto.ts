@@ -4,5 +4,6 @@ export class CreateUserDto {
     image: string;
     status: string;
     email: string;
+    username: string;
     password: string;
 }

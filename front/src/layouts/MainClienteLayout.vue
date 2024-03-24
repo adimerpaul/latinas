@@ -138,7 +138,7 @@ export default defineComponent({
         console.log(val)
         $router.push(`/book/${val.id}`)
       },
-      filterFn (val, update, abort) {
+      filterFn (val, update) {
         update(() => {
           const needle = val.toLowerCase()
           // console.log(needle)

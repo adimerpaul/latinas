@@ -36,9 +36,9 @@ export class UsersService {
     });
   }
   async login(createUserDto: CreateUserDto) {
-    const user = await this.userRepository.findOne({where: { email: createUserDto.email },});
+    const user = await this.userRepository.findOne({where: { username: createUserDto.username },});
     if (!user) {
-      throw new BadRequestException(`User with email ${createUserDto.email} not found`);
+      throw new BadRequestException(`User with email ${createUserDto.username} not found`);
     }
     if (!await bcrypt.compare(createUserDto.password, user.password)) {
         throw new BadRequestException(`Invalid password`);
@@ -80,6 +80,8 @@ export class UsersService {
     }
   async generate() {
     // await this.entityManager.query('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
+    await this.entityManager.query('TRUNCATE TABLE users;');
+    await this.entityManager.query('ALTER TABLE users AUTO_INCREMENT = 1; ');
     // this.userRepository.clear();
     // const facerUsers = [];
     // // for (let i = 0; i < 10; i++) {
@@ -92,11 +94,16 @@ export class UsersService {
     await this.userRepository.save([ {
       name: 'admin',
       email: 'admin@test.com',
-      password: await bcrypt.hash('123456', 10),
+      username: 'admin',
+      role: 'admin', // 'user' | 'admin
+      password: await bcrypt.hash('admin123Admin', 10),
     } ]);
 
     // Generar nuevos carousels
     // await this.entityManager.query('TRUNCATE TABLE carousels RESTART IDENTITY CASCADE');
+    this.entityManager.query('TRUNCATE TABLE carousels;');
+    this.entityManager.query('ALTER TABLE carousels AUTO_INCREMENT = 1; ');
+
     // await this.carouselRepository.clear();
     const carousels = [];
     carousels.push({
@@ -112,9 +119,26 @@ export class UsersService {
         imageMobile: 'trece_preguntas_-_cel_2.jpg',
     });
     await this.carouselRepository.save(carousels);
+    // this.bookRepository.clear();
+    // await this.entityManager.query('TRUNCATE TABLE books RESTART IDENTITY CASCADE');
+    await this.entityManager.query('SET FOREIGN_KEY_CHECKS=0');
+    await this.entityManager.query('TRUNCATE TABLE books;');
+    await this.entityManager.query('ALTER TABLE books AUTO_INCREMENT = 1; ');
+
+    let jsonData = fs.readFileSync('src/books/data/books.json', 'utf8');
+    let booksData = JSON.parse(jsonData);
+    await this.bookRepository.save(booksData);
+    jsonData = fs.readFileSync('src/books/data/booksMigrate.json', 'utf8');
+    booksData = JSON.parse(jsonData);
+    await this.bookRepository.save(booksData);
+    jsonData = fs.readFileSync('src/books/data/booksMigrate2.json', 'utf8');
+    booksData = JSON.parse(jsonData);
+    await this.bookRepository.save(booksData);
 
     // this.categoryRepository.clear();
     // await this.entityManager.query('TRUNCATE TABLE categories RESTART IDENTITY CASCADE');
+    await this.entityManager.query('TRUNCATE TABLE categories;');
+    await this.entityManager.query('ALTER TABLE categories AUTO_INCREMENT = 1; ');
 
     await this.categoryRepository.save([
       {name:'ADMINISTRACIÓN, CONTABILIDAD Y ECONOMÍA'},
@@ -128,17 +152,5 @@ export class UsersService {
       {name:'IDIOMAS'},
       {name:'INGENIERÍA'},
     ]);
-    // this.bookRepository.clear();
-    // await this.entityManager.query('TRUNCATE TABLE books RESTART IDENTITY CASCADE');
-
-    let jsonData = fs.readFileSync('src/books/data/books.json', 'utf8');
-    let booksData = JSON.parse(jsonData);
-    await this.bookRepository.save(booksData);
-    jsonData = fs.readFileSync('src/books/data/booksMigrate.json', 'utf8');
-    booksData = JSON.parse(jsonData);
-    await this.bookRepository.save(booksData);
-    jsonData = fs.readFileSync('src/books/data/booksMigrate2.json', 'utf8');
-    booksData = JSON.parse(jsonData);
-    await this.bookRepository.save(booksData);
   }
 }

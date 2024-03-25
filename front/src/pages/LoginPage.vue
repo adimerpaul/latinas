@@ -135,7 +135,7 @@ export default {
 
 .dark-overlay {
   /* Agrega las propiedades de la imagen de fondo */
-  background-image: url('fondoLogin.jpg');
+  background-image: url('./fondoLogin.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

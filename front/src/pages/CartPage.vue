@@ -29,7 +29,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { api, url } from 'boot/axios'
+import { url } from 'boot/axios'
 import { useQuasar } from 'quasar'
 import { useCounterStore } from 'stores/example-store'
 export default defineComponent({

@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Put} from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import {FileInterceptor} from "@nestjs/platform-express";
 
 @Controller('books')
 export class BooksController {
@@ -16,6 +17,11 @@ export class BooksController {
   findAll() {
     return this.booksService.findAll();
   }
+  @Post('upload/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file: Express.Multer.File, @Param('id') id: string) {
+    return this.booksService.uploadFile(file, id);
+  }
 
   @Get()
   findAllGroupedByCategory() {
@@ -27,7 +33,7 @@ export class BooksController {
     return this.booksService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
     return this.booksService.update(+id, updateBookDto);
   }

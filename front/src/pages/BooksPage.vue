@@ -112,7 +112,7 @@ export default {
     },
     bookSave () {
       if (this.bookOption === 'create') {
-        this.$axios.post('books', this.book).then(response => {
+        this.$axios.post('books', this.book).then(() => {
           this.booksGet()
           this.bookDialog = false
         }).catch(error => {

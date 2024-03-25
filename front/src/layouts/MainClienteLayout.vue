@@ -70,7 +70,7 @@
             <q-tooltip>Notificaciones</q-tooltip>
           </q-btn>
 
-          <q-btn round flat>
+          <q-btn round flat to="/login">
             <q-avatar size="26px">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
             </q-avatar>

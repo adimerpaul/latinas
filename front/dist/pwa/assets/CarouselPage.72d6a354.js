@@ -1,0 +1,1 @@
+import{Q as e}from"./QPage.ea5de0e9.js";import{_ as a,B as o,E as s,F as t,G as r,K as n}from"./index.7dc0ca6d.js";const c=o({name:"CarouselPage"}),_=n("div",null,"Carousel",-1);function l(p,u,d,f,i,m){return s(),t(e,null,{default:r(()=>[_]),_:1})}var B=a(c,[["render",l]]);export{B as default};

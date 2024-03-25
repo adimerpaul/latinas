@@ -15,13 +15,16 @@
           {{ $store.user.name }}
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>
+          <q-btn dense size="10px" label="Salir" no-caps @click="logout" color="red" icon="logout" />
+        </div>
       </q-toolbar>
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
+      :width="200"
       bordered
     >
       <q-list>
@@ -43,7 +46,7 @@
   </q-layout>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 
@@ -86,6 +89,23 @@ export default defineComponent({
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
+    }
+  },
+  methods: {
+    logout () {
+      this.$q.dialog({
+        title: 'Salir',
+        message: '¿Estás seguro de que deseas salir?',
+        persistent: true,
+        ok: {
+          label: 'Salir',
+          color: 'red'
+        },
+        cancel: 'Cancelar'
+      }).onOk(() => {
+        this.$store.isLogin = false
+        this.$router.push('/login')
+      })
     }
   }
 })

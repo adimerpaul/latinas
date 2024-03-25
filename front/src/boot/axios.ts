@@ -30,6 +30,13 @@ export default boot(({ app }) => {
   const token = localStorage.getItem('tokenLatinas')
   if (token) {
     api.defaults.headers.common.Authorization = `Bearer ${token}`
+    app.config.globalProperties.$axios.defaults.headers.common.Authorization = `Bearer ${token}`
+    app.config.globalProperties.$axios.get('/users/me').then((response:any) => {
+      useCounterStore().isLogged = true
+      useCounterStore().user = response.data
+    }).catch(() => {
+      useCounterStore().isLogged = false
+    })
   }
   // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
   //       so you won't necessarily have to import axios in each vue file

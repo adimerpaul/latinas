@@ -46,7 +46,7 @@ export class UsersService {
     const jwt = await this.jwtService.signAsync({ id: user.id });
     return {
         message: 'success',
-        jwt,
+        token: jwt,
         user,
     }
   }
@@ -71,7 +71,7 @@ export class UsersService {
       throw new NotFoundException(`User with id ${id} not found`);
     }
   }
-    async getProfile(id: number) {
+    async me(id: number) {
         const user = await this.userRepository.findOne({ where: { id } });
         if (!user) {
         throw new BadRequestException(`User with id ${id} not found`);
@@ -92,7 +92,7 @@ export class UsersService {
     //   });
     // // };
     await this.userRepository.save([ {
-      name: 'admin',
+      name: 'Administrador',
       email: 'admin@test.com',
       username: 'admin',
       role: 'admin', // 'user' | 'admin

@@ -50,6 +50,6 @@ export class UsersController {
   @UseGuards(AuthGuard)
   @Get('me')
   getProfile(@Request() req) {
-    return this.usersService.getProfile(req.user.id);
+    return this.usersService.me(req.user.id);
   }
 }

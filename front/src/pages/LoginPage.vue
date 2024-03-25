@@ -104,10 +104,9 @@ export default {
       this.loading = true
       this.$axios.post('users/login', this.user).then(response => {
         this.$store.user = response.data.user
-        this.$store.negocio = response.data.negocio
         localStorage.setItem('tokenLatinas', response.data.token)
         this.$store.isLogin = true
-        this.$router.push('/')
+        this.$router.push('/admin')
         this.$alert.success('Bienvenido ' + response.data.user.name)
       }).catch(error => {
         console.log(error.response.data.message)

@@ -128,12 +128,12 @@ export class UsersService {
     let jsonData = fs.readFileSync('src/books/data/books.json', 'utf8');
     let booksData = JSON.parse(jsonData);
     await this.bookRepository.save(booksData);
-    jsonData = fs.readFileSync('src/books/data/booksMigrate.json', 'utf8');
-    booksData = JSON.parse(jsonData);
-    await this.bookRepository.save(booksData);
-    jsonData = fs.readFileSync('src/books/data/booksMigrate2.json', 'utf8');
-    booksData = JSON.parse(jsonData);
-    await this.bookRepository.save(booksData);
+    // jsonData = fs.readFileSync('src/books/data/booksMigrate.json', 'utf8');
+    // booksData = JSON.parse(jsonData);
+    // await this.bookRepository.save(booksData);
+    // jsonData = fs.readFileSync('src/books/data/booksMigrate2.json', 'utf8');
+    // booksData = JSON.parse(jsonData);
+    // await this.bookRepository.save(booksData);
 
     // this.categoryRepository.clear();
     // await this.entityManager.query('TRUNCATE TABLE categories RESTART IDENTITY CASCADE');

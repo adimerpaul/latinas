@@ -86,10 +86,10 @@ export default {
       option: 'login',
       loading: false,
       user: {
-        username: 'admin',
-        password: 'admin123Admin',
-        confirmPassword: 'admin123Admin',
-        name: 'Administrador'
+        username: '',
+        password: '',
+        confirmPassword: '',
+        name: ''
       }
     }
   },

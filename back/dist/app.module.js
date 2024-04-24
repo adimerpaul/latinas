@@ -42,10 +42,6 @@ exports.AppModule = AppModule = __decorate([
                 rootPath: (0, path_1.join)(__dirname, '..', 'uploads'),
                 serveRoot: '/uploads',
             }),
-            serve_static_1.ServeStaticModule.forRoot({
-                rootPath: (0, path_1.join)(__dirname, '..', 'uploads', 'thumbnails'),
-                serveRoot: '/thumbnails',
-            }),
             categories_module_1.CategoriesModule,
             books_module_1.BooksModule,
         ],

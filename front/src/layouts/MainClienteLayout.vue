@@ -7,7 +7,7 @@
 <!--           Nuevo div con el texto-->
           <div class="q-px-none q-pt-xs q-ml-md" style="line-height: 0.8">
             <span class="text-bold text-white beauRivage" style="font-size: 2.5em">Latinas</span><br>
-            <span class="text-caption text-white beauRivage" style="font-size: 1.5em">Editores SRL</span>
+            <span class="text-caption text-white beauRivage" style="font-size: 1.5em">Editores LTDA</span>
           </div>
         </div>
 

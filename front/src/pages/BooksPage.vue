@@ -57,7 +57,7 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-    <pre>{{books}}</pre>
+<!--    <pre>{{books}}</pre>-->
   </q-page>
 </template>
 <script>

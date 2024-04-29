@@ -43,10 +43,16 @@ let BooksService = class BooksService {
         return await this.booksRepository.find({ relations: ['category'], order: { createdAt: 'DESC' } });
     }
     async findAllGroupedByCategory() {
-        return await this.categoriesRepository.find({
+        const categories = await this.categoriesRepository.find({
             relations: ['books'],
             order: { id: 'ASC' },
         });
+        categories.forEach(category => {
+            if (category.books.length > 5) {
+                category.books = category.books.slice(0, 5);
+            }
+        });
+        return categories;
     }
     async findOne(id) {
         return await this.booksRepository.findOne({ where: { id } });

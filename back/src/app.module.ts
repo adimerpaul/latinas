@@ -10,6 +10,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { CategoriesModule } from './categories/categories.module';
 import { BooksModule } from './books/books.module';
+import { SalesModule } from './sales/sales.module';
+import { DetailsModule } from './details/details.module';
 @Module({
   imports: [
       ConfigModule.forRoot(),
@@ -32,6 +34,8 @@ import { BooksModule } from './books/books.module';
       }),
       CategoriesModule,
       BooksModule,
+      SalesModule,
+      DetailsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

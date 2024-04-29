@@ -1,4 +1,5 @@
 import { Categories } from "../../categories/entities/categories.entity";
+import { Detail } from "../../details/entities/detail.entity";
 export declare class Books {
     id: number;
     name: string;
@@ -10,6 +11,7 @@ export declare class Books {
     stock: number;
     author: string;
     category: Categories;
+    details: Detail[];
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date;

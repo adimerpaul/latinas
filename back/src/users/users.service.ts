@@ -38,10 +38,10 @@ export class UsersService {
   async login(createUserDto: CreateUserDto) {
     const user = await this.userRepository.findOne({where: { username: createUserDto.username },});
     if (!user) {
-      throw new BadRequestException(`User with email ${createUserDto.username} not found`);
+      throw new BadRequestException(`El usuario ${createUserDto.username} no existe`);
     }
     if (!await bcrypt.compare(createUserDto.password, user.password)) {
-        throw new BadRequestException(`Invalid password`);
+        throw new BadRequestException(`Contraseña incorrecta`);
     }
     const jwt = await this.jwtService.signAsync({ id: user.id });
     return {
@@ -68,13 +68,13 @@ export class UsersService {
       await this.userRepository.update(id, userToRemove);
       return userToRemove;
     } else {
-      throw new NotFoundException(`User with id ${id} not found`);
+      throw new NotFoundException(`El Usuario con id ${id} no existe`);
     }
   }
     async me(id: number) {
         const user = await this.userRepository.findOne({ where: { id } });
         if (!user) {
-        throw new BadRequestException(`User with id ${id} not found`);
+        throw new BadRequestException(`Usuario con id ${id} no encontrado`);
         }
         return user;
     }

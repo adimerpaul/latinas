@@ -36,16 +36,21 @@ export class BooksService {
       //ordenar desendente
         return await this.booksRepository.find({ relations: ['category'], order: { createdAt: 'DESC' } });
     }
-  async findAllGroupedByCategory() {
-    // return await this.booksRepository.find({
-    //   relations: ['category'], // Cargar la relación con la categoría
-    //   // order: { category: 'ASC', createdAt: 'DESC' }, // Opcional: Ordenar por categoría y fecha de creación descendente
-    // });
-    return await this.categoriesRepository.find({
-        relations: ['books'], // Cargar la relación con la categoría
-        order: { id: 'ASC' }, // Opcional: Ordenar por categoría y fecha de creación descendente
-    });
-  }
+    async findAllGroupedByCategory() {
+        const categories = await this.categoriesRepository.find({
+            relations: ['books'],
+            order: { id: 'ASC' },
+        });
+
+        // Limitar a 5 libros por categoría
+        categories.forEach(category => {
+            if (category.books.length > 5) {
+                category.books = category.books.slice(0, 5);
+            }
+        });
+
+        return categories;
+    }
 
   async findOne(id: number) {
     return await this.booksRepository.findOne({ where: { id } });

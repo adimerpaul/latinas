@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Books = void 0;
 const typeorm_1 = require("typeorm");
 const categories_entity_1 = require("../../categories/entities/categories.entity");
+const detail_entity_1 = require("../../details/entities/detail.entity");
 let Books = class Books {
 };
 exports.Books = Books;
@@ -55,6 +56,10 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => categories_entity_1.Categories, (category) => category.books, { nullable: true }),
     __metadata("design:type", categories_entity_1.Categories)
 ], Books.prototype, "category", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => detail_entity_1.Detail, detail => detail.book),
+    __metadata("design:type", Array)
+], Books.prototype, "details", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

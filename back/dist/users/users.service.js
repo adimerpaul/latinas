@@ -44,10 +44,10 @@ let UsersService = class UsersService {
     async login(createUserDto) {
         const user = await this.userRepository.findOne({ where: { username: createUserDto.username }, });
         if (!user) {
-            throw new common_1.BadRequestException(`User with email ${createUserDto.username} not found`);
+            throw new common_1.BadRequestException(`El usuario ${createUserDto.username} no existe`);
         }
         if (!await bcrypt.compare(createUserDto.password, user.password)) {
-            throw new common_1.BadRequestException(`Invalid password`);
+            throw new common_1.BadRequestException(`Contraseña incorrecta`);
         }
         const jwt = await this.jwtService.signAsync({ id: user.id });
         return {
@@ -71,13 +71,13 @@ let UsersService = class UsersService {
             return userToRemove;
         }
         else {
-            throw new common_1.NotFoundException(`User with id ${id} not found`);
+            throw new common_1.NotFoundException(`El Usuario con id ${id} no existe`);
         }
     }
     async me(id) {
         const user = await this.userRepository.findOne({ where: { id } });
         if (!user) {
-            throw new common_1.BadRequestException(`User with id ${id} not found`);
+            throw new common_1.BadRequestException(`Usuario con id ${id} no encontrado`);
         }
         return user;
     }

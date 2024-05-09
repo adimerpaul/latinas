@@ -18,7 +18,8 @@ const routes: RouteRecordRaw[] = [
       { path: '', component: () => import('pages/IndexPage.vue'), meta: { requiresAuth: true } },
       { path: '/carousel', component: () => import('pages/CarouselPage.vue'), meta: { requiresAuth: true } },
       { path: '/books', component: () => import('pages/BooksPage.vue'), meta: { requiresAuth: true } },
-      { path: '/cogs', component: () => import('pages/CogsPage.vue'), meta: { requiresAuth: true } }
+      { path: '/cogs', component: () => import('pages/CogsPage.vue'), meta: { requiresAuth: true } },
+      { path: '/sales', component: () => import('pages/sale/SalePage.vue'), meta: { requiresAuth: true } }
     ]
   },
 

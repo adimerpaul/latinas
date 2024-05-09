@@ -34,20 +34,21 @@ export class BooksService {
 
     async findAll() {
       //ordenar desendente
-        return await this.booksRepository.find({ relations: ['category'], order: { createdAt: 'DESC' } });
+        return await this.booksRepository.find();
     }
     async findAllGroupedByCategory() {
         const categories = await this.categoriesRepository.find({
-            relations: ['books'],
+            relations: [ 'books' ],
             order: { id: 'ASC' },
+            select: ['id', 'name'],
         });
 
-        // Limitar a 5 libros por categoría
-        categories.forEach(category => {
-            if (category.books.length > 5) {
-                category.books = category.books.slice(0, 5);
-            }
-        });
+        // // Limitar a 5 libros por categoría
+        // categories.forEach(category => {
+        //     if (category.books.length > 5) {
+        //         category.books = category.books.slice(0, 5);
+        //     }
+        // });
 
         return categories;
     }

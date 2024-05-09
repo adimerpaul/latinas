@@ -26,7 +26,7 @@
                     v-slot="{ item }"
             >
                 <q-card class="my-card cursor-pointer" @click="this.$router.push(`/book/${item.id}`)">
-                    <q-img :src="`${url}uploads/${item.image}`" style="width: 200px;height: 200px">
+                    <q-img :src="`${url}uploads/thumb_${item.image}`" style="width: 170px;height: 170px">
 <!--                        <div class="absolute-bottom text-center text-bold" style="padding: 5px;line-height: 1">-->
 <!--                            {{item.name}}-->
 <!--                        </div>-->
@@ -134,7 +134,7 @@ export default defineComponent({
   width: 100%
   margin: 5px
   padding: 0px
-  max-width: 200px
+  max-width: 170px
 .subrayar
   text-decoration: line-through
 </style>

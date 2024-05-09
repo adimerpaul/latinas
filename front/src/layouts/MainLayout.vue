@@ -67,9 +67,9 @@ const linksList = [
     link: 'books'
   },
   {
-    title: 'Herramientas',
-    icon: 'engineering',
-    link: 'cogs'
+    title: 'Pedidos',
+    icon: 'shopping_cart',
+    link: 'sales'
   }
 ]
 
